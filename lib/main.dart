@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 void main() {
   runApp(MyApp());
@@ -28,23 +29,11 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Pertemuan 3 Column dan row"),
+          title: Text("Webview"),
         ),
-        body: Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20), color: Colors.red),
-          margin: EdgeInsets.all(10),
-          padding: EdgeInsets.all(20),
-          child: Container(
-            // color: Colors.blue,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [Colors.yellow, Colors.green],
-                )),
-          ),
+        body: WebView(
+          initialUrl: "https://flutter.dev",
+          javascriptMode: JavascriptMode.unrestricted,
         ));
   }
 }
