@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:pm_2/first_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -27,56 +27,20 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () => showExitPopup(context),
-      child: Scaffold(
+    return MaterialApp(
+      home: Scaffold(
           appBar: AppBar(
             title: Text("Task 3"),
           ),
-          body: Container(
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-            margin: EdgeInsets.all(20),
-            child: WebView(
-              initialUrl: "https://rehandwi03.github.io",
-              javascriptMode: JavascriptMode.unrestricted,
+          body: Center(
+            child: ElevatedButton(
+              child: Text("Go to tab"),
+              onPressed: () {
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => const FirstPage()));
+              },
             ),
           )),
     );
-  }
-
-  Future<bool> showExitPopup(BuildContext context) async {
-    return await showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            content: Container(
-              height: 90,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text("Do you want to exit?"),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                          child: ElevatedButton(
-                        onPressed: () {},
-                        child: Text("Yes"),
-                      )),
-                      SizedBox(width: 15),
-                      Expanded(
-                          child: ElevatedButton(
-                        onPressed: () {},
-                        child: Text("No"),
-                      ))
-                    ],
-                  )
-                ],
-              ),
-            ),
-          );
-        });
   }
 }
