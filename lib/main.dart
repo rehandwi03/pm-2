@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pm_2/qr-scan.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void main() {
@@ -62,7 +63,22 @@ class Home extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 button(context, googleUrl, "Location", Icons.location_on),
-                TextButton(onPressed: () {}, child: Text("Scan"))
+                TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const QRScan()));
+                    },
+                    child: Column(
+                      children: [
+                        Icon(
+                          Icons.qr_code,
+                          size: 80,
+                        ),
+                        Text("Scan")
+                      ],
+                    ))
               ],
             )
           ],
