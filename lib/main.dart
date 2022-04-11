@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pm_2/first_page.dart';
+import 'package:pm_2/tab_page/page_four.dart';
+import 'package:pm_2/tab_page/page_one.dart';
+import 'package:pm_2/tab_page/page_three.dart';
+import 'package:pm_2/tab_page/page_two.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,7 +13,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'App Bar',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -24,23 +28,45 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
+class MyNumber {
+  int number;
+
+  MyNumber({required this.number});
+
+  int multiplyByTwo() => number * 2;
+}
+
 class _MyHomePageState extends State<MyHomePage> {
+  TextEditingController controller = TextEditingController();
+  MyNumber mynumber = MyNumber(number: 0);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-          appBar: AppBar(
-            title: Text("Task 3"),
+    return DefaultTabController(
+      length: 4,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Formatif"),
+          bottom: const TabBar(
+            tabs: [
+              Tab(
+                child: Text("Tab 1"),
+              ),
+              Tab(
+                child: Text("Tab 2"),
+              ),
+              Tab(
+                child: Text("Tab 3"),
+              ),
+              Tab(
+                child: Text("Tab 4"),
+              )
+            ],
           ),
-          body: Center(
-            child: ElevatedButton(
-              child: Text("Go to tab"),
-              onPressed: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => const FirstPage()));
-              },
-            ),
-          )),
+        ),
+        body: TabBarView(
+            children: [PageOne(), PageTwo(), PageThree(), PageFour()]),
+      ),
     );
   }
 }
