@@ -32,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Formatif 2"),
+        title: Text("UTS"),
       ),
       body: Center(
         child: ElevatedButton(
