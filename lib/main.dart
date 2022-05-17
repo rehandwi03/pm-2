@@ -1,16 +1,9 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pm_2/bloc/counter_bloc.dart';
 
 void main() {
-  runApp(MultiProvider(
-    providers: [ChangeNotifierProvider(create: (_) => Counter())],
-    child: MyApp(),
-  ));
-  // runApp(Provider(
-  //   create: (_) => Counter(),
-  //   child: MyApp(),
-  // ));
+  runApp(MyApp());
 }
 
 class Count extends StatelessWidget {
@@ -18,20 +11,11 @@ class Count extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('${context.watch<Counter>().count}',
-        key: const Key('counterState'),
-        style: Theme.of(context).textTheme.headline4);
-  }
-}
-
-class Counter with ChangeNotifier, DiagnosticableTreeMixin {
-  int _count = 0;
-
-  int get count => _count;
-
-  void increment() {
-    _count++;
-    notifyListeners();
+    return Container(child: BlocBuilder<CounterBloc, int>(
+      builder: (context, count) {
+        return Text('$count', style: Theme.of(context).textTheme.headline1);
+      },
+    ));
   }
 }
 
@@ -55,7 +39,7 @@ class Home extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         key: const Key('increment_floatingActionButton'),
-        onPressed: () => context.read<Counter>().increment(),
+        onPressed: () => context.read<CounterBloc>().add(Increment()),
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
@@ -72,7 +56,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Home(),
+      home: BlocProvider(
+        create: (_) => CounterBloc(),
+        child: Home(),
+      ),
     );
   }
 }
