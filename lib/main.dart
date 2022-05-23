@@ -1,32 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pm_2/data/repository/reqres_repository.dart';
+import 'package:pm_2/presentation/home.dart';
 
 void main() {
   runApp(MyApp());
-}
-
-class Home extends StatelessWidget {
-  Home({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Pertemuan 5"),
-      ),
-      body: Center(child: Text("Hello World")),
-    );
-  }
 }
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    // f
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Home(),
+      home: RepositoryProvider(
+        create: (context) => ReqresRepository(),
+        child: Home(),
+      ),
     );
   }
 }
